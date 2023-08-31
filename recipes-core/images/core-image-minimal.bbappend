@@ -1,1 +1,1 @@
-IMAGE_INSTALL:append = " rohc"
+IMAGE_INSTALL:append = " librohc"
