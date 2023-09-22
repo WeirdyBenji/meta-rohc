@@ -1,0 +1,47 @@
+From 03f9c24b7435c0596c41c096688252ba20f50d2d Mon Sep 17 00:00:00 2001
+From: Benjamin Feller <benjamin.feller@viveris.fr>
+Date: Mon, 11 Sep 2023 16:06:43 +0200
+Subject: [PATCH] fix stdarg not found for those who need specific kernel
+ header when compiling in kernel mode
+
+---
+ src/comp/rohc_comp.c     | 5 ++++-
+ src/decomp/rohc_decomp.c | 4 ++++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/comp/rohc_comp.c b/src/comp/rohc_comp.c
+index a7db468c..44d83115 100644
+--- a/src/comp/rohc_comp.c
++++ b/src/comp/rohc_comp.c
+@@ -68,8 +68,11 @@
+ #include <stdlib.h>
+ #include <stdbool.h>
+ #include <assert.h>
++#ifdef __KERNEL__
++#include <linux/stdarg.h>
++#else
+ #include <stdarg.h>
+-
++#endif
+ 
+ /** The affinity between packet and context */
+ typedef enum
+diff --git a/src/decomp/rohc_decomp.c b/src/decomp/rohc_decomp.c
+index 7be7a6b9..b5caa66a 100644
+--- a/src/decomp/rohc_decomp.c
++++ b/src/decomp/rohc_decomp.c
+@@ -52,7 +52,11 @@
+ #include "crc.h"
+ 
+ #include <string.h>
++#ifdef __KERNEL__
++#include <linux/stdarg.h>
++#else
+ #include <stdarg.h>
++#endif
+ #include <stdint.h>
+ #include <assert.h>
+ 
+-- 
+2.34.1
+

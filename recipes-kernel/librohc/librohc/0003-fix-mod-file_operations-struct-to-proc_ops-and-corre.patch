@@ -1,0 +1,72 @@
+From 55b85214fc725cc00c9a8e2ddcb6fac7132c1241 Mon Sep 17 00:00:00 2001
+From: Benjamin Feller <benjamin.feller@viveris.fr>
+Date: Mon, 11 Sep 2023 16:24:12 +0200
+Subject: [PATCH] fix mod file_operations struct to proc_ops and corresponding
+ members according to kernel header update since 5.6
+
+---
+ linux/kmod_test.c | 36 ++++++++++++++++--------------------
+ 1 file changed, 16 insertions(+), 20 deletions(-)
+
+diff --git a/linux/kmod_test.c b/linux/kmod_test.c
+index d525cee8..dd2624fc 100644
+--- a/linux/kmod_test.c
++++ b/linux/kmod_test.c
+@@ -931,38 +931,34 @@ static int rohc_proc_close(struct inode *inode, struct file *file)
+ 
+ 
+ /** File operations for /proc/rohc_comp%d_in */
+-static const struct file_operations rohc_proc_comp_in_fops = {
+-	.owner   = THIS_MODULE,
+-	.open    = rohc_proc_open,
+-	.write   = rohc_proc_comp_write,
+-	.release = rohc_proc_close,
++static const struct proc_ops rohc_proc_comp_in_fops = {
++	.proc_open    = rohc_proc_open,
++	.proc_write   = rohc_proc_comp_write,
++	.proc_release = rohc_proc_close,
+ };
+ 
+ 
+ /** File operations for /proc/rohc_comp%d_out */
+-static const struct file_operations rohc_proc_comp_out_fops = {
+-	.owner   = THIS_MODULE,
+-	.open    = rohc_proc_open,
+-	.read   = rohc_proc_comp_read,
+-	.release = rohc_proc_close,
++static const struct proc_ops rohc_proc_comp_out_fops = {
++	.proc_open    = rohc_proc_open,
++	.proc_read   = rohc_proc_comp_read,
++	.proc_release = rohc_proc_close,
+ };
+ 
+ 
+ /** File operations for /proc/rohc_decomp%d_in */
+-static const struct file_operations rohc_proc_decomp_in_fops = {
+-	.owner   = THIS_MODULE,
+-	.open    = rohc_proc_open,
+-	.write   = rohc_proc_decomp_write,
+-	.release = rohc_proc_close,
++static const struct proc_ops rohc_proc_decomp_in_fops = {
++	.proc_open    = rohc_proc_open,
++	.proc_write   = rohc_proc_decomp_write,
++	.proc_release = rohc_proc_close,
+ };
+ 
+ 
+ /** File operations for /proc/rohc_decomp%d_out */
+-static const struct file_operations rohc_proc_decomp_out_fops = {
+-	.owner   = THIS_MODULE,
+-	.open    = rohc_proc_open,
+-	.read   = rohc_proc_decomp_read,
+-	.release = rohc_proc_close,
++static const struct proc_ops rohc_proc_decomp_out_fops = {
++	.proc_open    = rohc_proc_open,
++	.proc_read   = rohc_proc_decomp_read,
++	.proc_release = rohc_proc_close,
+ };
+ 
+ 
+-- 
+2.34.1
+
