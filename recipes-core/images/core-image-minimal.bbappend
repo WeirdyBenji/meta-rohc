@@ -1,1 +1,2 @@
-IMAGE_INSTALL:append = " kernel-module-librohc"
+#IMAGE_INSTALL:append = " kernel-module-librohc"
+
