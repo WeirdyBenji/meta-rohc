@@ -16,11 +16,20 @@ S = "${WORKDIR}/rohc-${PV}"
 
 inherit module pkgconfig autotools-brokensep
 
-## Because KERNEL_SRC is not set, we difine --with...
-EXTRA_OECONF:append = " --enable-linux-kernel-module --with-linux-kernel-src=${STAGING_KERNEL_DIR}"
+## We define --with... because KERNEL_SRC may be not set
+EXTRA_OECONF:append = " --enable-linux-kernel-module \
+			--with-linux-kernel-src=${STAGING_KERNEL_DIR} \
+			"
 
 FILES:${PN} = "${libdir}/*"
 
+## Makefile.am defines /lib/modules/$(uname -r) on the host but we want on the target /lib/modules/${KERNEL_VERSION}
+do_install:append() {
+	rohc_moddir=${D}/lib/modules/${KERNEL_VERSION}
+	install -d ${rohc_moddir}/extra
+	install -m 644 ${B}/linux/kmod/rohc.ko ${rohc_moddir}/extra/rohc.ko
+	install -m 644 ${B}/linux/kmod/rohc_test.ko ${rohc_moddir}/extra/rohc_test.ko
+}
+
 RPROVIDES:${PN} += "kernel-module-${PN}"
-KERNEL_MODULE_AUTOLOAD = "${PN}"
 
