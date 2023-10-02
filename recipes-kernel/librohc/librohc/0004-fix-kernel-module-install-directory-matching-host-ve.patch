@@ -1,0 +1,25 @@
+From 0c7394cd5a612b03bf20f98acb116dec3da44afa Mon Sep 17 00:00:00 2001
+From: Benjamin Feller <benjamin.feller@viveris.fr>
+Date: Wed, 27 Sep 2023 16:05:50 +0200
+Subject: [PATCH] Fix kernel module install directory matching host version instead of target's (yocto)
+
+---
+ linux/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/linux/Makefile.am b/linux/Makefile.am
+index d5c0403..7b548b0 100644
+--- a/linux/Makefile.am
++++ b/linux/Makefile.am
+@@ -14,7 +14,7 @@ rohc_mod = $(rohc_modname).ko
+ rohc_test_modname = rohc_test
+ rohc_test_mod = $(rohc_test_modname).ko
+ 
+-rohc_moddir = /lib/modules/`uname -r`/extra
++rohc_moddir = /lib/modules/$(KERNEL_VERSION)/extra
+ 
+ EXTRA_DIST = \
+ 	kmod.c \
+-- 
+2.34.1
+
