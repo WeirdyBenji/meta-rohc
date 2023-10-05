@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 SRC_URI = "https://rohc-lib.org/download/rohc-2.3.x/${PV}/rohc-${PV}.tar.xz"
 SRC_URI[sha256sum] = "e5c3808518239a6a4673c0c595356d5054b208f32e39015a487a0490d03f9bec"
 SRC_URI += "file://0001-fix-rohc_buf_-export-preventing-compilation-in-kerne.patch;subdir=rohc-${PV} \
+            file://0002-fix-stdarg-not-found-for-those-who-need-specific-ker.patch;subdir=rohc-${PV} \
             file://0003-fix-mod-file_operations-struct-to-proc_ops-and-corre.patch;subdir=rohc-${PV} \
             file://0004-fix-kernel-module-install-directory-matching-host-ve.patch;subdir=rohc-${PV} \
             "
