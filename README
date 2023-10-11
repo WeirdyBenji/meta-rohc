@@ -1,4 +1,4 @@
-This README file contains information on the contents of the meta-thales layer.
+This README file contains information on the contents of the meta-rohc layer.
 
 Please see the corresponding sections below for details.
 
@@ -7,7 +7,7 @@ Dependencies: none
 Patches
 =======
 
-Please submit any patches against the meta-thales layer to the xxxx mailing list (xxxx@zzzz.org)
+Please submit any patches against the meta-rohc layer to the xxxx mailing list (xxxx@zzzz.org)
 and cc: the maintainer:
 
 Maintainer: Benjamin Feller <benjamin.feller@viveris.fr>
@@ -15,16 +15,16 @@ Maintainer: Benjamin Feller <benjamin.feller@viveris.fr>
 Table of Contents
 =================
 
-  I. Adding the meta-thales layer to your build
+  I. Adding the meta-rohc layer to your build
  II. Misc
 
 
-I. Adding the meta-thales layer to your build
+I. Adding the meta-rohc layer to your build
 =================================================
 
-Run 'bitbake-layers add-layer meta-thales'
+Run 'bitbake-layers add-layer meta-rohc'
 
 II. Misc
 ========
 
---- replace with specific information about the meta-thales layer ---
+--- replace with specific information about the meta-rohc layer ---
